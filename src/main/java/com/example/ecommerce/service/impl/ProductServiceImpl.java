@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ecommerce.dao.ProductRepository;
 import com.example.ecommerce.dto.ProductDto;
+import com.example.ecommerce.model.Product;
 import com.example.ecommerce.service.ProductService;
 import com.example.ecommerce.utils.ImageUpload;
 
@@ -134,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductDto> searchProducts(int pageNo, String keyword) {
         Pageable pageable = PageRequest.of(pageNo, 5);
-        List<ProductDto> productDtoList = transfer(productRepository.searchProductsList(keyword));
+        List<ProductDto> productDtoList = transfer(productRepository.searchProducts(keyword));
         Page<ProductDto> products = toPage(productDtoList, pageable);
         return products;
     }
@@ -179,12 +180,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.getAllProducts();
+        return productRepository.getAllProduct();
     }
 
     @Override
     public List<Product> listViewProducts() {
-        return productRepository.listViewProducts();
+        return productRepository.listViewProduct();
     }
 
     @Override
@@ -192,15 +193,18 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getReferenceById(id);
     }
 
-    @Override
-    public List<Product> getRelatedProducts(Long categoryId) {
-        return productRepository.getRelatedProducts(categoryId);
-    }
+    
 
     @Override
     public List<Product> getProductsInCategory(Long categoryId) {
-        return productRepository.getProductsInCategory(categoryId);
+        return productRepository.getProductByCategoryId(categoryId);
     }
+
+	@Override
+	public List<Product> getRelatedProducts(Long categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	

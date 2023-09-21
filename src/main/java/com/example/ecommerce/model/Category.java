@@ -13,10 +13,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Categories", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Category {
-	public Category(){
-        
-    }
-    public Long getId() {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
+    private Long id;
+    private String name;
+    private boolean is_deleted;
+    private boolean is_activated;
+
+    public Category(String name){
+        this.name = name;
+        this.is_activated = true;
+        this.is_deleted = false;
+
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -48,19 +60,7 @@ public class Category {
 		this.is_activated = is_activated;
 	}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Long id;
-    private String name;
-    private boolean is_deleted;
-    private boolean is_activated;
-
-    public Category(String name){
-        this.name = name;
-        this.is_activated = true;
-        this.is_deleted = false;
-    }
+	
     
 
 }
