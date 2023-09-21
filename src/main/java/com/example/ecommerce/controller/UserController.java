@@ -12,9 +12,9 @@ public class UserController {
     private UserService userService;
 
     // display list of employees
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
-        model.addAttribute("listUsers", userService.findAll());
-        return "index";
-    }
+  //  @GetMapping("/")
+    //public String viewHomePage(Model model) {
+      //  model.addAttribute("listUsers", userService.findAll());
+        //return "index";
+   // }
 }
