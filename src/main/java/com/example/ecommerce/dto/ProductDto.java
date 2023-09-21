@@ -1,17 +1,16 @@
-package com.example.ecommerce.model;
+package com.example.ecommerce.dto;
 
+import com.example.ecommerce.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.validation.constraints.NegativeOrZero;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "products", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "image"}))
-public class Product {
+@AllArgsConstructor
+public class ProductDto {
     
 	public Long getId() {
 		return id;
@@ -55,48 +54,41 @@ public class Product {
 	public void setBuy_count(int buy_count) {
 		this.buy_count = buy_count;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	public Category getCategory() {
 		return category;
 	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public boolean isIs_deleted() {
-		return is_deleted;
+	public String getImage() {
+		return image;
 	}
-	public void setIs_deleted(boolean is_deleted) {
-		this.is_deleted = is_deleted;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public boolean isIs_activated() {
-		return is_activated;
+	public boolean isActivated() {
+		return activated;
 	}
-	public void setIs_activated(boolean is_activated) {
-		this.is_activated = is_activated;
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long id;
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	private Long id;
     private String name;
     private String description;
     private double price;
     private String brand;
     private int quantity;
     private int buy_count;
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String image;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    private boolean is_deleted;
-    private boolean is_activated;
+    private String image;
+    private boolean activated;
+    private boolean deleted;
 	
-
+	
 }
